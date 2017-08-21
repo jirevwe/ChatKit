@@ -584,31 +584,37 @@ public class DialogsListAdapter<DIALOG extends IDialog>
 
             //Set Date
             String formattedDate = null;
-            Date lastMessageDate = dialog.getLastMessage().getCreatedAt();
-            if (datesFormatter != null) formattedDate = datesFormatter.format(lastMessageDate);
-            tvDate.setText(formattedDate == null
-                    ? getDateString(lastMessageDate)
-                    : formattedDate);
-
-            //Set Dialog avatar
-            if (imageLoader != null) {
-                imageLoader.loadImage(ivAvatar, dialog.getDialogPhoto());
+            if(dialog.getLastMessage() != null) { // TODO: 07/08/2017 I changed this
+                Date lastMessageDate = dialog.getLastMessage().getCreatedAt();
+                if (datesFormatter != null) formattedDate = datesFormatter.format(lastMessageDate);
+                tvDate.setText(formattedDate == null
+                        ? getDateString(lastMessageDate)
+                        : formattedDate);
             }
 
-            //Set Last message user avatar
-            if (imageLoader != null) {
-                imageLoader.loadImage(ivLastMessageUser, dialog.getLastMessage().getUser().getAvatar());
-            }
-            ivLastMessageUser.setVisibility(dialogStyle.isDialogMessageAvatarEnabled()
-                    && dialog.getUsers().size() > 1 ? VISIBLE : GONE);
+            if(dialog.getLastMessage() != null) {
+                //Set Dialog avatar
+                if (imageLoader != null) {
+                    imageLoader.loadImage(ivAvatar, dialog.getDialogName());
+                }
 
-            //Set Last message text
-            tvLastMessage.setText(dialog.getLastMessage().getText());
+                //Set Last message user avatar
+                ivLastMessageUser.setVisibility(GONE);
+//                if (imageLoader != null && dialog.getLastMessage().getUser() != null) { // TODO: 07/08/2017 I changed this too
+//                    imageLoader.loadImage(ivLastMessageUser, dialog.getLastMessage().getUser().getAvatar());
+//                }
+//                ivLastMessageUser.setVisibility(dialogStyle.isDialogMessageAvatarEnabled() /*&& dialog.getUsers().size() > 1*/ ? VISIBLE : GONE);
+
+
+                //Set Last message text
+                tvLastMessage.setText(dialog.getLastMessage().getMessage());
+            }
 
             //Set Unread message count bubble
             tvBubble.setText(String.valueOf(dialog.getUnreadCount()));
             tvBubble.setVisibility(dialogStyle.isDialogUnreadBubbleEnabled() &&
                     dialog.getUnreadCount() > 0 ? VISIBLE : GONE);
+
 
             container.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -32,9 +32,15 @@ public interface MessageContentType extends IMessage {
      * Default media type for image message.
      */
     interface Image extends IMessage {
-        String getImageUrl();
+        String getLocalImageUrl();
+        String getRemoteImageUrl();
     }
 
-    // other default types will be here
-
+    /**
+     * Default media type for document message.
+     */
+    interface Document extends IMessage {
+        String getLocalDocumentUrl();
+        String getRemoteDocumentUrl();
+    }
 }

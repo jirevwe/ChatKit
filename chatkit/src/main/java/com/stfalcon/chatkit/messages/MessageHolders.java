@@ -387,7 +387,7 @@ public class MessageHolders {
 
         if (item instanceof IMessage) {
             IMessage message = (IMessage) item;
-            isOutcoming = message.getUser().getId().contentEquals(senderId);
+            isOutcoming = message.getUser().getUserId().contentEquals(senderId);
             viewType = getContentViewType(message);
 
         } else viewType = VIEW_TYPE_DATE_HEADER;
@@ -419,7 +419,7 @@ public class MessageHolders {
     @SuppressWarnings("unchecked")
     private short getContentViewType(IMessage message) {
         if (message instanceof MessageContentType.Image
-                && ((MessageContentType.Image) message).getImageUrl() != null) {
+                && ((MessageContentType.Image) message).getRemoteImageUrl() != null) {
             return VIEW_TYPE_IMAGE_MESSAGE;
         }
 
@@ -527,7 +527,7 @@ public class MessageHolders {
             }
 
             if (text != null) {
-                text.setText(message.getText());
+                text.setText(message.getMessage());
             }
         }
 
@@ -576,7 +576,7 @@ public class MessageHolders {
             }
 
             if (text != null) {
-                text.setText(message.getText());
+                text.setText(message.getMessage());
             }
         }
 
@@ -630,7 +630,7 @@ public class MessageHolders {
         public void onBind(MESSAGE message) {
             super.onBind(message);
             if (image != null && imageLoader != null) {
-                imageLoader.loadImage(image, message.getImageUrl());
+                imageLoader.loadImage(image, message.getRemoteImageUrl());
             }
 
             if (imageOverlay != null) {
@@ -681,7 +681,7 @@ public class MessageHolders {
         public void onBind(MESSAGE message) {
             super.onBind(message);
             if (image != null && imageLoader != null) {
-                imageLoader.loadImage(image, message.getImageUrl());
+                imageLoader.loadImage(image, message.getRemoteImageUrl());
             }
 
             if (imageOverlay != null) {

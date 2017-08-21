@@ -179,7 +179,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
      * @param message updated message object.
      */
     public void update(MESSAGE message) {
-        update(message.getId(), message);
+        update(message.getMessageId(), message);
     }
 
     /**
@@ -203,7 +203,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
      * @param message message to delete.
      */
     public void delete(MESSAGE message) {
-        deleteById(message.getId());
+        deleteById(message.getMessageId());
     }
 
     /**
@@ -213,7 +213,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
      */
     public void delete(List<MESSAGE> messages) {
         for (MESSAGE message : messages) {
-            int index = getMessagePositionById(message.getId());
+            int index = getMessagePositionById(message.getMessageId());
             items.remove(index);
             notifyItemRemoved(index);
         }
@@ -464,7 +464,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
             Wrapper wrapper = items.get(i);
             if (wrapper.item instanceof IMessage) {
                 MESSAGE message = (MESSAGE) wrapper.item;
-                if (message.getId().contentEquals(id)) {
+                if (message.getMessageId().contentEquals(id)) {
                     return i;
                 }
             }
@@ -486,7 +486,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
         int prevPosition = position + 1;
         if (items.size() <= prevPosition) return false;
         else return items.get(prevPosition).item instanceof IMessage
-                && ((MESSAGE) items.get(prevPosition).item).getUser().getId().contentEquals(id);
+                && ((MESSAGE) items.get(prevPosition).item).getUser().getUserId().contentEquals(id);
     }
 
     private void incrementSelectedItemsCount() {
@@ -542,7 +542,7 @@ public class MessagesListAdapter<MESSAGE extends IMessage>
                     else decrementSelectedItemsCount();
 
                     MESSAGE message = (wrapper.item);
-                    notifyItemChanged(getMessagePositionById(message.getId()));
+                    notifyItemChanged(getMessagePositionById(message.getMessageId()));
                 } else {
                     notifyMessageClicked(wrapper.item);
                     notifyMessageViewClicked(view, wrapper.item);

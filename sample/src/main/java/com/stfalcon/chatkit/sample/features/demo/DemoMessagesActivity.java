@@ -119,7 +119,7 @@ public abstract class DemoMessagesActivity extends AppCompatActivity
                 String createdAt = new SimpleDateFormat("MMM d, EEE 'at' h:mm a", Locale.getDefault())
                         .format(message.getCreatedAt());
 
-                String text = message.getText();
+                String text = message.getMessage();
                 if (text == null) text = "[attachment]";
 
                 return String.format(Locale.getDefault(), "%s: %s (%s)",

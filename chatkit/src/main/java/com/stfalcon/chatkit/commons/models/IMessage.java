@@ -28,14 +28,14 @@ public interface IMessage {
      *
      * @return the message id
      */
-    String getId();
+    String getMessageId();
 
     /**
      * Returns message text
      *
      * @return the message text
      */
-    String getText();
+    String getMessage();
 
     /**
      * Returns message author. See the {@link IUser} for more details

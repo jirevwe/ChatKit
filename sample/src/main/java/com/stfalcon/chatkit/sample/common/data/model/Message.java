@@ -12,7 +12,7 @@ public class Message implements IMessage,
         MessageContentType.Image, /*this is for default image messages implementation*/
         MessageContentType /*and this one is for custom content type (in this case - voice message)*/ {
 
-    private String id;
+    private String messageId;
     private String text;
     private Date createdAt;
     private User user;
@@ -24,19 +24,19 @@ public class Message implements IMessage,
     }
 
     public Message(String id, User user, String text, Date createdAt) {
-        this.id = id;
+        this.messageId = id;
         this.text = text;
         this.user = user;
         this.createdAt = createdAt;
     }
 
     @Override
-    public String getId() {
-        return id;
+    public String getMessageId() {
+        return messageId;
     }
 
     @Override
-    public String getText() {
+    public String getMessage() {
         return text;
     }
 
@@ -48,11 +48,6 @@ public class Message implements IMessage,
     @Override
     public User getUser() {
         return this.user;
-    }
-
-    @Override
-    public String getImageUrl() {
-        return image == null ? null : image.url;
     }
 
     public Voice getVoice() {
@@ -77,6 +72,16 @@ public class Message implements IMessage,
 
     public void setVoice(Voice voice) {
         this.voice = voice;
+    }
+
+    @Override
+    public String getLocalImageUrl() {
+        return null;
+    }
+
+    @Override
+    public String getRemoteImageUrl() {
+        return image == null ? null : image.url;
     }
 
     public static class Image {
